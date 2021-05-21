@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl" xmlns:th="http://www.thymeleaf.org" >
+<head>
+    <meta charset="UTF-8">
+    <title>OTO cars for you</title>
+</head>
+<body>
+<h1 th:align="center">Oto cars for you</h1>
+<tr>
+  <div>
+    <form th:action="@{/filtercar}" th:field="*{years}" method="post">
+      <table th:align="left">
+        <tr align="center">
+          <th>from year</th>
+          <th>to year</th>
+        </tr>
+        <tr>
+          <td><input th:type="text" th:field="*{years.fromYear}" th:maxlength="4" th:width="4"/></td>
+          <td><input th:type="text" th:field="*{years.toYear}" th:maxlength="4" th:width="4"/></td>
+          <td><input type="submit" value="filter years" /></td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</tr>
+
+
+<tr>
+  <div th:align="left" >
+    <table width="100%"; th:border="1">
+      <tr align="center" th:bgcolor="grey">
+        <th>Id</th>
+        <th>Model</th>
+        <th>Mark</th>
+        <th>Color</th>
+        <th>Year</th>
+      </tr>
+      <tr th:if="${#lists.isEmpty(cars)}">
+        <td colspan="5">Brak autek. Dodaj...!</td>
+      </tr>
+      <tr th:each="car : ${cars}" th:bgcolor="lightyellow">
+        <td th:text="${car.id}"></td>
+        <td th:text="${car.mark}"></td>
+        <td th:text="${car.model}"></td>
+        <td th:text="${car.color}"></td>
+        <td th:text="${car.year}" th:maxlength="4" th:width="4"></td>
+      </tr>
+    </table>
+</div>
+</tr>
+<br/>
+<tr>
+<div>
+<form th:action="@{/addcar}" th:field="*{newcar}" method="post">
+  <table th:align="left">
+    <tr align="center">
+      <th>Model</th>
+      <th>Mark</th>
+      <th>Color</th>
+      <th>Year</th>
+    </tr>
+    <tr>
+      <td><input th:type="text" th:field="*{newcar.mark}"/></td>
+      <td><input th:type="text" th:field="*{newcar.model}"/></td>
+      <td><input th:type="text" th:field="*{newcar.color}"/></td>
+      <td><input th:type="text" th:field="*{newcar.year}" th:maxlength="4" th:width="4"/></td>
+      <td><input type="submit" value="add a car" /></td>
+    </tr>
+  </table>
+</form>
+</div>
+</tr>
+</body>
